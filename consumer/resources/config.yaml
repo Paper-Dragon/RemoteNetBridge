@@ -1,0 +1,67 @@
+mixed-port: 10802
+
+allow-lan: true
+
+log-level: debug # 日志等级 silent/error/warning/info/debug
+
+sniffer:
+  enable: true
+
+#  find-process-mode has 3 values:always, strict, off
+#  - always, 开启，强制匹配所有进程
+#  - strict, 默认，由 mihomo 判断是否开启
+#  - off, 不匹配进程，推荐在路由器上使用此模式
+find-process-mode: strict
+
+# rule 规则匹配
+# global 全局代理 (需要在 GLOBAL 策略组选择代理/策略)
+# direct 全局直连
+mode: rule
+
+
+
+interface-name: enp0s8
+
+tun:
+  enable: true
+  stack: gvisor #system #mixed #gvisor
+  # auto-redirect: true
+  auto-route: true
+  dns-hijack:
+    - 0.0.0.0:53 
+  auto-detect-interface: false
+
+
+dns:
+  enable: true
+  listen: 0.0.0.0:53
+  # ipv6: false
+  enhanced-mode: fake-ip #redir-host
+  # fake-ip-range: 198.19.0.1/16
+  # nameserver:
+  #   - 114.114.114.114:53
+  # fallback:
+  #   - 8.8.8.8:53
+
+proxies:
+  # http
+  - name: "网络提供者"
+    type: http
+    server: 11.0.1.10
+    port: 10801
+    # username: username
+    # password: password
+    # tls: true # https
+    # skip-cert-verify: true
+    # sni: custom.com
+    # fingerprint: xxxx # 同 experimental.fingerprints 使用 sha256 指纹，配置协议独立的指纹，将忽略 experimental.fingerprints
+    # ip-version: dual
+
+proxy-groups:
+  - name: provider
+    type: url-test
+    proxies:
+    - 网络提供者
+
+rules:
+  - DOMAIN-KEYWORD,.,provider
