@@ -1,39 +1,42 @@
-# RemoteNetBridge
+# stream cross tunnel
 
-#### 介绍
-{**以下是 Gitee 平台说明，您可以替换此简介**
-Gitee 是 OSCHINA 推出的基于 Git 的代码托管平台（同时支持 SVN）。专为开发者提供稳定、高效、安全的云端软件开发协作平台
-无论是个人、团队、或是企业，都能够用 Gitee 实现代码托管、项目管理、协作开发。企业项目请看 [https://gitee.com/enterprises](https://gitee.com/enterprises)}
+```bash
+project-root/
+├── provider/                       # 网络提供设备相关的代码和配置
+│   ├── bin/
+│   │   ├── clash/                  # Clash 二进制及配置
+│   │   │   ├── clash               # Clash 二进制文件
+│   │   │   └── clash_config.yaml   # Clash 配置文件（网络提供者）
+│   └── scripts/
+│       ├── linux/                  # Linux 平台的提供端脚本
+│       │   ├── setup_ssh_tunnel.sh # 使用 SSH 建立隧道的脚本
+│       ├── windows/                # Windows 平台的提供端脚本
+│       │   ├── setup_rdp_tunnel.ps1 # 使用 RDP 建立隧道的 PowerShell 脚本
+│       └── common/                 # 跨平台的通用脚本
+│           ├── start_proxy.sh      # 启动 Clash 代理
+│           └── health_check.sh     # 健康检查脚本
+├── consumer/                       # 网络使用者相关的代码和配置
+│   ├── bin/
+│   │   └── clash/                  # Clash 二进制及配置
+│   │       ├── clash               # Clash 二进制文件
+│   │       └── clash_config.yaml   # Clash 配置文件（网络使用者）
+│   └── scripts/
+│       ├── linux/                  # Linux 平台的使用端脚本
+│       │   └── setup_consumer.sh   # 配置使用者的脚本
+│       ├── windows/                # Windows 平台的使用端脚本
+│       │   └── setup_consumer.ps1  # PowerShell 脚本
+│       └── common/                 # 通用的配置或检查脚本
+│           └── health_check.sh     # 健康检查脚本
+├── config/
+│   ├── provider_config.yaml        # 网络提供设备通用配置
+│   └── consumer_config.yaml        # 网络使用者端的配置文件
+├── docs/                           # 项目文档
+│   ├── architecture.md             # 系统架构设计文档
+│   ├── setup_guide.md              # 项目配置和安装指南
+│   └── usage.md                    # 使用说明
+├── logs/                           # 日志文件存放目录
+│   └── proxy.log
+├── .gitignore                      # Git忽略文件
+└── README.md                       # 项目概述和快速入门
 
-#### 软件架构
-软件架构说明
-
-
-#### 安装教程
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### 使用说明
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### 参与贡献
-
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
-
-
-#### 特技
-
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+```
