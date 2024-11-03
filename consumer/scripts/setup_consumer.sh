@@ -1,0 +1,1 @@
+../mihomo-linux-amd64-v1.18.9/mihomo-linux-amd64 -d ../resources
