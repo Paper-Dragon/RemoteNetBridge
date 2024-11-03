@@ -16,38 +16,17 @@ find-process-mode: strict
 # rule 规则匹配
 # global 全局代理 (需要在 GLOBAL 策略组选择代理/策略)
 # direct 全局直连
+
 mode: rule
-
-
-
-interface-name: enp0s8
-
-tun:
-  enable: true
-  stack: gvisor #system #mixed #gvisor
-  # auto-redirect: true
-  auto-route: true
-  dns-hijack:
-    - 0.0.0.0:53 
-  auto-detect-interface: false
-
 
 dns:
   enable: true
-  listen: 0.0.0.0:53
-  # ipv6: false
-  enhanced-mode: fake-ip #redir-host
-  # fake-ip-range: 198.19.0.1/16
-  # nameserver:
-  #   - 114.114.114.114:53
-  # fallback:
-  #   - 8.8.8.8:53
 
 proxies:
   # http
   - name: "网络提供者"
     type: http
-    server: 11.0.1.10
+    server: 127.0.0.1
     port: 10801
     # username: username
     # password: password
