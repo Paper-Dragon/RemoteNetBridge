@@ -23,6 +23,13 @@ dns:
   enable: true
 
 proxies:
+  # RDP隧道
+  - name: "rdp-tunnel"
+    type: socks5
+    server: 127.0.0.1
+    port: 1080
+    skip-cert-verify: true
+
   # http
   - name: "网络提供者"
     type: http
